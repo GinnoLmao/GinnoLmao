@@ -1,0 +1,35 @@
+name: Refresh developer dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 3 * * 1"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/profile-cards.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: developer-dashboard
+  cancel-in-progress: true
+
+jobs:
+  dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@v4
+
+      - name: Generate GitHub activity cards
+        uses: seijikohara/profile-cards-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          username: GinnoLmao
+          cards: overview,contributions,rhythm,languages
+          output-dir: assets
+          themes: light,dark
+          commit: true
+          commit-message: "chore: refresh developer metrics [skip ci]"
