@@ -13,7 +13,7 @@ I like exploring how AI, data, and well-built software come together — from tr
 
 ---
 
-### `focus.map`
+### focus map
 
 | Area | What I Like Building | Tools |
 | :--- | :--- | :--- |
